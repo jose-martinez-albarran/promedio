@@ -22,7 +22,13 @@ router
     return res.render('auth/login');
   })
   .post('/login', passport.authenticate('local'), (req, res, next)=>{
-    return res.redirect('/');
+    let role = req.user.role;
+    console.log(role)
+    if(role === 'Empleado'){
+      return res.redirect('/private2');
+    } else {
+      return res.redirect('/private');
+    }
   })
   .get('/logout', (req, res, next)=>{
     req.logout();
@@ -32,6 +38,13 @@ router
     const user = req.user;
     if(user){
       return res.render('auth/private', {user: req.user});
+    }
+    return res.redirect("/login")
+  })
+  .get('/private2', (req, res, next)=>{
+    const user = req.user;
+    if(user){
+      return res.render('auth/private2', {user: req.user});
     }
     return res.redirect("/login")
   })
