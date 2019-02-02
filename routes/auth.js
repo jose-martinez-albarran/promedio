@@ -9,7 +9,7 @@ router
     res.render('auth/signup');
   })
   .post('/signup', (req, res, next)=>{
-    User.register( new User({ username: req.body.username }),
+    User.register( new User({ username: req.body.username , role: req.body.role }),
     req.body.password,
     function(err, account){
       if(err){
