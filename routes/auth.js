@@ -37,14 +37,14 @@ router
   .get('/private', (req, res, next)=>{
     const user = req.user;
     if(user){
-      return res.render('empleador/private', {user: req.user});
+      return res.render('auth/empleador/private', {user: req.user});
     }
     return res.redirect("/login")
   })
   .get('/private2', (req, res, next)=>{
     const user = req.user;
     if(user){
-      return res.render('empleado/private2', {user: req.user});
+      return res.render('auth/empleado/private2', {user: req.user});
     }
     return res.redirect("/login")
   })
