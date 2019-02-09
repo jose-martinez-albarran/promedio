@@ -16,6 +16,15 @@ a {
   background-size: cover;
   opacity: 0.8; }
 
+@media (max-width: 991.98px) {
+  .promedio-main {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    background: url("../images/Financial-wellbeing-promedio.jpg") center;
+    background-size: cover;
+    opacity: 0.8; } }
+
 .promedio-title {
   color: #375699; }
 

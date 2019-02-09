@@ -20,6 +20,20 @@ a {
   opacity: 0.8;
 }
 
+@media (max-width:991.98px){
+
+  .promedio-main{
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    background: url("../images/Financial-wellbeing-promedio.jpg") center;
+    background-size: cover;
+    opacity: 0.8;
+  }
+
+
+}
+
 .promedio-title{
    color: rgb(55, 86, 153)
 }
@@ -73,8 +87,6 @@ a {
 
 
 .auth-user-testimonial{position:absolute;margin:0 auto;padding:0 1.75rem;bottom:3rem;left:0;right:0}.auth-user-testimonial p.lead{font-size:1.125rem;margin:0 auto 20px auto;max-width:700px}
-
-
 
 @media (max-width:991.98px){
   .auth-fluid{display:block}
