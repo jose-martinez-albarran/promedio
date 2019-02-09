@@ -3,6 +3,8 @@ const {Router} = require('express');
 const router = Router();
 
 const User = require('../models/User');
+const multer  = require('multer');
+const upload = multer({ dest: './public/uploads/' });
 
 router
   .get('/signup', (req, res, next)=>{
@@ -48,9 +50,37 @@ router
     }
     return res.redirect("/login")
   })
+  .get('/profile', (req, res, next)=>{
+    const user = req.user;
+    if(user){
+      return res.render('auth/empleado/profile', {user: req.user});
+    }
+    return res.redirect("/login")
+  })
   .get('/logout', (req, res, next)=>{
     req.logout();
     res.redirect('/login');
   })
+
+  router.post('/upload', upload.single('photo'), (req,res)=>{
+    const pic = new User({
+      name: req.body.name,
+      path: `/uploads/${req.file.filename}`,
+      originalName: req.file.originalname
+    })
+    pic.save((err) => {
+      res.redirect('/profile');
+    });
+
+    const {name, path, originalName} = req.body
+    User.updateOne({_id:req.query.user_id}, {$set: {name, path, originalName}})
+    .then(Usuario =>{
+      res.redirect('/profile')
+    })
+    .catch(err=>console.log(err))
+  });
+
+
+  
 
 module.exports = router;

@@ -307,7 +307,7 @@ body.boxed-layout .footer {
     float: left; }
   .navbar-custom .topbar-right-menu .nav-link {
     padding: 0;
-    color: gray;
+    color: #98a6ad;
     min-width: 32px;
     display: block;
     text-align: center;
@@ -324,7 +324,7 @@ body.boxed-layout .footer {
     height: 38px;
     padding-left: 40px;
     padding-right: 20px;
-    background-color: gray;
+    background-color: #bcebf3;
     box-shadow: none; }
   .app-search span {
     position: absolute;
@@ -410,8 +410,8 @@ body.boxed-layout .footer {
   padding: 17px 20px 17px 57px !important;
   text-align: left !important;
   position: relative;
-  background-color: #868686;
-  border: 1px solid gray;
+  background-color: #fafbfd;
+  border: 1px solid #f1f3fa;
   border-width: 0 1px;
   min-height: 70px; }
   .nav-user .account-user-avatar {
@@ -428,6 +428,108 @@ body.boxed-layout .footer {
   .nav-user .account-user-name {
     display: block;
     font-weight: bold; }
+
+.arrow-none::after {
+  display: none; }
+
+.enlarged .wrapper .left-side-menu {
+  position: absolute;
+  padding-top: 0;
+  width: 70px;
+  z-index: 5; }
+
+enlarged .side-nav .side-nav-item {
+  position: relative;
+  white-space: nowrap; }
+
+.metismenu li {
+  list-style: none; }
+
+*, ::after, ::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+user agent stylesheet
+li {
+  display: list-item;
+  text-align: -webkit-match-parent; }
+
+user agent stylesheet
+ul, menu, dir {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px; }
+
+body {
+  margin: 0;
+  font-family: Nunito,sans-serif;
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #6c757d;
+  text-align: left;
+  background-color: #fafbfe; }
+
+.left-side-menu {
+  width: 250px;
+  z-index: 10;
+  background: linear-gradient(135deg, #8f75da 0, #727cf5 60%);
+  bottom: 0;
+  position: fixed;
+  -webkit-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+  top: 0; }
+
+*, ::after, ::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+user agent stylesheet
+div {
+  display: block; }
+
+.page-title-box .page-title-right {
+  float: right;
+  margin-top: 25px; }
+
+.page-title-box .page-title {
+  font-size: 18px;
+  margin: 0;
+  line-height: 85px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; }
+
+.form-inline {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.card-body {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1.5rem; }
+
+.side-nav .side-nav-link {
+  color: #cedce4;
+  display: block;
+  padding: 15px 30px;
+  font-size: .9375rem;
+  position: relative;
+  -webkit-transition: all .4s;
+  transition: all .4s; }
 
 .button-menu-mobile {
   border: none;
@@ -475,13 +577,41 @@ body.boxed-layout .footer {
   min-height: 80vh; }
 
 .left-side-menu {
-  width: 20vh;
+  width: 250px;
   z-index: 10;
   background: #23bed6;
   bottom: 0;
   position: fixed;
   transition: all .2s ease-out;
   top: 0; }
+
+@media (min-width: 576px) {
+  .form-inline .form-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 0; } }
+
+.form-group {
+  margin-bottom: 1rem; }
+
+*, ::after, ::before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+user agent stylesheet
+div {
+  display: block; }
 
 .side-nav .side-nav-link {
   color: white;
@@ -628,6 +758,9 @@ body.enlarged {
 .side-nav-light .side-nav-title {
   color: white; }
 
+.dripicons-meter:before {
+  content: "\e022"; }
+
 .help-box {
   border-radius: 5px;
   padding: 20px;
@@ -652,6 +785,32 @@ body.boxed-layout {
     box-shadow: gray; }
   body.boxed-layout.enlarged .footer {
     max-width: calc(20vh - 70px); }
+
+.card {
+  border: none;
+  -webkit-box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
+  box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
+  margin-bottom: 30px; }
+
+.card {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #e3eaef;
+  border-radius: .25rem; }
+
+.widget-flat {
+  position: relative;
+  overflow: hidden; }
 
 @media (max-width: 991.98px) {
   .auth-fluid {
