@@ -25,7 +25,7 @@
         <!-- Begin page -->
         <div class="wrapper">
 
-            @@include('./partials/left-sidebar.html')
+          {{> left-sidebar}}
 
             <!-- ============================================================== -->
             <!-- Start Page Content here -->
@@ -34,7 +34,7 @@
             <div class="content-page">
                 <div class="content">
 
-                    @@include('./partials/topbar.html')
+                    {{> topbar}}
                     
                     <!-- Start Content-->
                     <div class="container-fluid">
@@ -567,7 +567,7 @@
                 </div>
                 <!-- content -->
 
-                @@include('./partials/footer.html')
+                {{> footer}}
 
             </div>
 
@@ -579,7 +579,7 @@
         </div>
         <!-- END wrapper -->
 
-        @@include('./partials/right-sidebar.html')
+       
 
         <!-- bundle -->
         <script src="assets/js/app.min.js"></script>

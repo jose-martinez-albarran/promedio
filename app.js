@@ -62,6 +62,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
+app.get('/views/auth/partials/footer', (req, res, next) => {
+  res.render('footer');
+});
+
+app.get('/views/auth/partials/left-sidebar', (req, res, next) => {
+  res.render('left-sidebar');
+});
+
+app.get('/views/auth/partials/topbar', (req, res, next) => {
+  res.render('topbar');
+});
+
+// Register partials
+
+hbs.registerPartials(__dirname + '/views/auth/partials');
 
 // default value for title local
 app.locals.title = 'Promedio';
