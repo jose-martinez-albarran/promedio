@@ -60,35 +60,20 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
-
-// Register partials
-
 hbs.registerPartials(__dirname + '/views/auth/partials');
-
-app.get('/auth/partials/footer', (req, res, next) => {
-  res.render('footer');
-});
-
-app.get('/auth/partials/leftSideBar', (req, res, next) => {
-  res.render('leftSideBar');
-});
-
-app.get('/auth/partials/topbar', (req, res, next) => {
-  res.render('topbar');
-});
-
-
 
 // default value for title local
 app.locals.title = 'Promedio';
-
-
 
 const index = require('./routes/index');
 app.use('/', index);
 
 const authRoutes = require("./routes/auth");
 app.use('/', authRoutes);
+
+// Register partials
+
+
 
 
 module.exports = app;
