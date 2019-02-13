@@ -8,6 +8,8 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+const multer       = require('multer');
+
 const passport = require('./services/passport')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
@@ -42,6 +44,30 @@ app.use(require('express-session')({
     ttl: 24 * 60 * 60 // 1 day
   })
 }));
+
+var storage = multer.diskStorage({ //multers disk storage settings
+  destination: function (req, file, cb) {
+      cb(null, './uploads/')
+  },
+  filename: function (req, file, cb) {
+      var datetimestamp = Date.now();
+      cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
+  }
+});
+var upload = multer({ //multer settings
+              storage: storage
+          }).single('file');
+/** API path that will upload the files */
+app.post('/upload', function(req, res) {
+  upload(req,res,function(err){
+      if(err){
+           res.json({error_code:1,err_desc:err});
+           return;
+      }
+       res.json({error_code:0,err_desc:null});
+  });
+});
+
 
 app.use(passport.initialize())
 app.use(passport.session())

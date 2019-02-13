@@ -57,30 +57,47 @@ router
     }
     return res.redirect("/login")
   })
-  .get('/logout', (req, res, next)=>{
+   .get('/logout', (req, res, next)=>{
     req.logout();
     res.redirect('/login');
   })
 
-  router.post('/upload', upload.single('photo'), (req,res)=>{
-    const pic = new User({
-      name: req.body.name,
-      path: `/uploads/${req.file.filename}`,
-      originalName: req.file.originalname
-    })
-    pic.save((err) => {
-      res.redirect('/profile');
-    });
 
-    const {name, path, originalName} = req.body
-    User.updateOne({_id:req.query.user_id}, {$set: {name, path, originalName}})
-    .then(Usuario =>{
-      res.redirect('/profile')
+  .post("/profile", (req,res) => {
+    const { ingreso , beneficiarios, username, role} = req.body;
+    User.updateOne(
+      { _id: req.query.user_id },
+      { $set: { ingreso , beneficiarios, username, role} }
+    )
+    .then(user => {
+      res.redirect("/profile");
     })
-    .catch(err=>console.log(err))
+    .catch(err => console.log(err));
+  });
+
+  
+ router .get("/libros/:id", (req, res) => {
+    let libroId = req.params.id;
+    console.log(libroId);
+    Books.findOne({ _id: libroId })
+      .populate("author")
+      .then(libro => {
+        res.render("book-detalle", { libro });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
 
 
+  router.post('/upload', upload.single('photo'), (req, res)=>{
+    const {path} = req.body
+    User.updateOne({_id:req.query.user_id}, {$set: {path}})
+    .then(libro =>{
+      res.redirect('/private2')
+    })
+    .catch(err=>console.log(err))
+  })
   
 
 module.exports = router;
