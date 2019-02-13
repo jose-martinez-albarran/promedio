@@ -8,6 +8,8 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+const multer       = require('multer');
+
 const passport = require('./services/passport')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
@@ -43,6 +45,30 @@ app.use(require('express-session')({
   })
 }));
 
+var storage = multer.diskStorage({ //multers disk storage settings
+  destination: function (req, file, cb) {
+      cb(null, './uploads/')
+  },
+  filename: function (req, file, cb) {
+      var datetimestamp = Date.now();
+      cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
+  }
+});
+var upload = multer({ //multer settings
+              storage: storage
+          }).single('file');
+/** API path that will upload the files */
+app.post('/upload', function(req, res) {
+  upload(req,res,function(err){
+      if(err){
+           res.json({error_code:1,err_desc:err});
+           return;
+      }
+       res.json({error_code:0,err_desc:null});
+  });
+});
+
+
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -59,21 +85,23 @@ app.use(require('node-sass-middleware')({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/assets', express.static(path.join(__dirname, 'public')));
+
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
+
 hbs.registerPartials(__dirname + '/views/auth/partials');
+
 
 // default value for title local
 app.locals.title = 'Promedio';
+
+
 
 const index = require('./routes/index');
 app.use('/', index);
 
 const authRoutes = require("./routes/auth");
 app.use('/', authRoutes);
-
-// Register partials
-
-
 
 
 module.exports = app;
