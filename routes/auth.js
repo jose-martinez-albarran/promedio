@@ -3,13 +3,15 @@ const {Router} = require('express');
 const router = Router();
 
 const User = require('../models/User');
+const multer  = require('multer');
+const upload = multer({ dest: './public/uploads/' });
 
 router
   .get('/signup', (req, res, next)=>{
     res.render('auth/signup');
   })
   .post('/signup', (req, res, next)=>{
-    User.register( new User({ username: req.body.username }),
+    User.register( new User({ username: req.body.username , role: req.body.role }),
     req.body.password,
     function(err, account){
       if(err){
@@ -22,7 +24,13 @@ router
     return res.render('auth/login');
   })
   .post('/login', passport.authenticate('local'), (req, res, next)=>{
-    return res.redirect('/');
+    let role = req.user.role;
+    console.log(role)
+    if(role === 'Empleado'){
+      return res.redirect('/private2');
+    } else {
+      return res.redirect('/private');
+    }
   })
   .get('/logout', (req, res, next)=>{
     req.logout();
@@ -31,13 +39,65 @@ router
   .get('/private', (req, res, next)=>{
     const user = req.user;
     if(user){
-      return res.render('auth/private', {user: req.user});
+      return res.render('auth/empleador/private', {user: req.user});
     }
     return res.redirect("/login")
   })
-  .get('/logout', (req, res, next)=>{
+  .get('/private2', (req, res, next)=>{
+    const user = req.user;
+    if(user){
+      return res.render('auth/empleado/private2', {user: req.user});
+    }
+    return res.redirect("/login")
+  })
+  .get('/profile', (req, res, next)=>{
+    const user = req.user;
+    if(user){
+      return res.render('auth/empleado/profile', {user: req.user});
+    }
+    return res.redirect("/login")
+  })
+   .get('/logout', (req, res, next)=>{
     req.logout();
     res.redirect('/login');
   })
+
+
+  .post("/profile", (req,res) => {
+    const { ingreso , beneficiarios, username, role} = req.body;
+    User.updateOne(
+      { _id: req.query.user_id },
+      { $set: { ingreso , beneficiarios, username, role} }
+    )
+    .then(user => {
+      res.redirect("/profile");
+    })
+    .catch(err => console.log(err));
+  });
+
+  
+ router .get("/libros/:id", (req, res) => {
+    let libroId = req.params.id;
+    console.log(libroId);
+    Books.findOne({ _id: libroId })
+      .populate("author")
+      .then(libro => {
+        res.render("book-detalle", { libro });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
+
+  router.post('/upload', upload.single('photo'), (req, res)=>{
+    const {path} = req.body
+    User.updateOne({_id:req.query.user_id}, {$set: {path}})
+    .then(libro =>{
+      res.redirect('/private2')
+    })
+    .catch(err=>console.log(err))
+  })
+  
 
 module.exports = router;

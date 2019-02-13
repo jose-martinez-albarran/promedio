@@ -1,7 +1,15 @@
-<div class="entry">
-  {{#if user}}
-    <h1>welcome {{user.username}}</h1>
-  {{else}}
-    <p>please login or signup</p>
-  {{/if}}
+<div class="promedio-main">
+<nav class="navbar navbar-expand-lg navbar-light nav-bar-promedio">
+  <img src="assets/images/promedio-logo.png" alt="promedio-logo">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a href="/login" class="btn btn-primary">Iniciar Sesión<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a href="/signup" class="btn btn-link">Registrate</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 </div>

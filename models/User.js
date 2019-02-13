@@ -4,7 +4,23 @@ const passportLocalMongoose =require('passport-local-mongoose');
 
 const userSchema = new Schema({
   username: String,
-  password: String
+  password: String,
+  role: String,
+  empresa: String,
+  nombre: String,
+  apellidoPaterno: String,
+  apellidoMaterno: String,
+  sexo: String,
+  celular: String,
+  correo: String,
+  fechaNacimiento: Date,
+  rfcEmpleado: String,
+  direccion: String,
+  puesto: String,
+  ingreso: Array,
+  path: String,
+  originalName: String,
+  beneficiarios: [{type: Schema.ObjectId, ref: 'Beneficiarios'}]
 }, {
   timestamps: { 
     createdAt: "created_at",
