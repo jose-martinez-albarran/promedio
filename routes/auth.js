@@ -74,6 +74,13 @@ router
       .catch(err=>console.log(err))
     }
 })
+.get("/banorte", (req, res, next) => {
+  const user = req.user;
+  if (user) {
+    return res.render("banks/banorte", { user: req.user });
+  }
+  return res.redirect("/login");
+})
   .get("/photo", (req, res, next) => {
     const user = req.user;
     console.log(user);
