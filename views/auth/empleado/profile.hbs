@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="wrapper">{{> leftSidebar}}
   <div class="content-page">
     <h2>Mi cuenta</h2>
@@ -49,6 +50,34 @@
           <label for="password">Correo</label>
           <input class="form-control" type="text" name="password" id="password" required=""
             placeholder="{{user.correo}}">
+=======
+<div class="wrapper">{{> leftSideBar}}
+  <div class="content-page">
+    <div class="card-body">
+      <form action="/profile" method="post">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input class="form-control" type="text" name="nombre" id="nombre" required="" placeholder="{{user.nombre}}">
+        </div>
+        <div class="form-group">
+          <label for="apellidoPaterno">Apellido Paterno</label>
+          <input class="form-control" type="text" name="apellidoPaterno" id="apellidoPaterno" required=""
+            placeholder="{{user.apellidoPaterno}}">
+        </div>
+        <div class="form-group">
+          <label for="apellidoMaterno">Apellido Materno</label>
+          <input class="form-control" type="text" name="apellidoMaterno" id="apellidoMaterno" required=""
+            placeholder="{{user.apellidoMaterno}}">
+        </div>
+        <div class="form-group">
+          <label for="celular">Celular</label>
+          <input class="form-control" type="text" name="celular" id="celular" required=""
+            placeholder="{{user.celular}}">
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo</label>
+          <input class="form-control" type="text" name="correo" id="correo" required="" placeholder="{{user.correo}}">
+>>>>>>> uploadPhoto
         </div>
         <div class="form-group mb-0 text-center">
           <button class="btn btn-primary btn-block" type="submit"><i class="mdi mdi-login"></i> Guardar </button>
