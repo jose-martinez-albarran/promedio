@@ -1,0 +1,16 @@
+<div class="wrapper">{{> leftSideBar}}
+  <div class="content-page">
+    <h2>Foto de Perfil</h2>
+    <div class="card-body">
+      <form action="/photo" method="post" enctype="multipart/form-data">
+        <input type="file" name="photo">
+        <input type="submit" value="Save">
+      </form>
+    </div>
+    <section>
+      {{#each pictures}}
+      <img src="{{ this.path }}" alt="{{ this.originalName }}" />
+      {{/each}}
+    </section>
+  </div>
+</div>
