@@ -18,6 +18,7 @@ const userSchema = new Schema({
   direccion: String,
   puesto: String,
   ingreso: Array,
+  ingresoActual: String,
   path: String,
   originalName: String,
   beneficiarios: [{type: Schema.ObjectId, ref: 'Beneficiarios'}]
