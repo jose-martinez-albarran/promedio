@@ -50,6 +50,15 @@ router
     }
     return res.redirect("/login")
   })
+
+  .get('/profileE', (req, res, next)=>{
+    const user = req.user;
+    if(user){
+      return res.render('auth/empleador/profileE', {user: req.user});
+    }
+    return res.redirect("/login");
+  })
+
   .get('/profile', (req, res, next)=>{
     const user = req.user;
     if(user){
@@ -57,6 +66,7 @@ router
     }
     return res.redirect("/login")
   })
+  
    .get('/logout', (req, res, next)=>{
     req.logout();
     res.redirect('/login');
