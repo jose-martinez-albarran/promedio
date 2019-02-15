@@ -1,10 +1,13 @@
 const passport = require('passport');
 const {Router} = require('express');
 const router = Router();
+const express = require("express");
 
 const User = require('../models/User');
 const multer  = require('multer');
 const upload = multer({ dest: './public/uploads/' });
+const authRoutes = express.Router();
+
 
 router
   .get('/signup', (req, res, next)=>{
@@ -23,6 +26,8 @@ router
   .get('/login', (req, res, next)=>{
     return res.render('auth/login');
   })
+
+  
   .post('/login', passport.authenticate('local'), (req, res, next)=>{
     let role = req.user.role;
     console.log(role)
@@ -66,12 +71,13 @@ router
     }
     return res.redirect("/login")
   })
-  
+
    .get('/logout', (req, res, next)=>{
     req.logout();
     res.redirect('/login');
   })
 
+  
 
   .post("/profile", (req,res) => {
     const { ingreso , beneficiarios, username, role} = req.body;
@@ -85,7 +91,8 @@ router
     .catch(err => console.log(err));
   });
 
-  
+ 
+ 
  router .get("/libros/:id", (req, res) => {
     let libroId = req.params.id;
     console.log(libroId);
