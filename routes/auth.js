@@ -2,11 +2,6 @@ const passport = require("passport");
 const { Router } = require("express");
 const router = Router();
 
-<<<<<<< HEAD
-const User = require('../models/User.js');
-const multer  = require('multer');
-const upload = multer({ dest: './public/uploads/' });
-=======
 const User = require("../models/User");
 const multer = require("multer");
 const upload = multer({ dest: "./public/uploads/" });
@@ -16,7 +11,6 @@ const nodeMailer = require('nodemailer');
 const iframeReplacement = require('node-iframe-replacement');
 
 router.use(iframeReplacement);
->>>>>>> uploadPhoto
 
 router
   .get("/signup", (req, res, next) => {
