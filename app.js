@@ -60,6 +60,7 @@ var storage = multer.diskStorage({ //multers disk storage settings
 var upload = multer({ //multer settings
               storage: storage
           }).single('file');
+          
 /** API path that will upload the files */
 app.post('/upload', function(req, res) {
   upload(req,res,function(err){
@@ -104,7 +105,6 @@ passport.use(new GoogleStrategy({
 
 }));
 
-app.use(user.createStrategy());
 
 app.use(passport.initialize())
 app.use(passport.session())

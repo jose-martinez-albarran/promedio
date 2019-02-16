@@ -72,18 +72,6 @@ router
     return res.redirect("/login")
   })
 
-  router.post('/buscar', (req, res)=>{
-    let nombreEmpleado = req.body.username;
-    User.find({title: {$regex: nombreEmpleado, $options: 'r'}})
-    .populate('username')
-    .then((empleado)=>{
-      res.json(empleado)
-    })
-    .catch(err=>{
-      console.log(err);
-    })
-  })
-  
 
     //Google register
  
@@ -155,6 +143,17 @@ router
     .catch(err=>console.log(err))
   })
 
+  // router.post('/buscar', (req, res)=>{
+  //   let nombreEmpleado = req.body.username;
+  //   User.find({title: {$regex: nombreEmpleado, $options: 'r'}})
+  //   .populate('username')
+  //   .then((empleado)=>{
+  //     res.json(empleado)
+  //   })
+  //   .catch(err=>{
+  //     console.log(err);
+  //   })
+  // })
  
 
 module.exports = router;
