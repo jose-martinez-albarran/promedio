@@ -129,6 +129,16 @@ router
       });
   });
 
+  router.get('/Empleados', (req, res)=>{
+    User.find()
+      .then(Empelados =>{
+        res.render('empleados', {Empelados})
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+  })
+
 
   router.post('/upload', upload.single('photo'), (req, res)=>{
     const {path} = req.body
