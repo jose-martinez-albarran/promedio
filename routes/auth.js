@@ -71,7 +71,10 @@ router
   })
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 28dc600... cambios en buscar
 =======
 >>>>>>> parent of 28dc600... cambios en buscar
     //Google register
