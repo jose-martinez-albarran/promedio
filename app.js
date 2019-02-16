@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const bodyParser   = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express      = require('express');
@@ -9,10 +10,12 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 const multer       = require('multer');
+const user         = require('./models/User');
 
 const passport = require('./services/passport')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
+
 
 
 
@@ -67,6 +70,36 @@ app.post('/upload', function(req, res) {
        res.json({error_code:0,err_desc:null});
   });
 });
+
+
+passport.use(new GoogleStrategy({
+  clientID: "780518897261-ktcvtita7t5ce99jmnlqj0gh8q8a8bu7.apps.googleusercontent.com",
+  clientSecret: "w11M-09zbVszitX1JwHELtkn",
+  callbackURL: "/auth/google/callback"
+}, (accessToken, refreshToken, profile, done) => {
+  user.findOne({ googleID: profile.id })
+  .then(user => {
+    if (err) {
+      return done(err);
+    }
+    if (user) {
+      return done(null, user);
+    }
+
+    const newUser = new User({
+      googleID: profile.id
+    });
+
+    newUser.save()
+    .then(user => {
+      done(null, newUser);
+    })
+  })
+  .catch(error => {
+    next(error)
+  })
+
+}));
 
 
 app.use(passport.initialize())

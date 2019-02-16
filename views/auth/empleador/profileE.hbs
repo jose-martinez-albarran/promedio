@@ -1,0 +1,52 @@
+<div class="wrapper">{{> leftSidebar}}
+  <div class="content-page">
+    <h2>Mi cuenta</h2>
+    <div class="card-body">
+      <form action="/login" method="post">
+        <div class="form-group">
+          <label for="username">Usuario</label>
+          <input class="form-control" type="text" name="username" id="username" required=""
+            placeholder="{{user.username}}">
+        </div>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input class="form-control" type="text" name="password" id="password" required=""
+            placeholder="{{user.nombre}}">
+        </div>
+        <div class="form-group">
+          <label for="password">Apellido Paterno</label>
+          <input class="form-control" type="text" name="password" id="password" required=""
+            placeholder="{{user.apellidoPaterno}}">
+        </div>
+        <div class="form-group">
+          <label for="password">Apellido Materno</label>
+          <input class="form-control" type="text" name="password" id="password" required=""
+            placeholder="{{user.apellidoMaterno}}">
+        </div>
+        <div class="form-group">
+          <label for="password">Celular</label>
+          <input class="form-control" type="text" name="password" id="password" required=""
+            placeholder="{{user.celular}}">
+        </div>
+        <div class="form-group">
+          <label for="password">Correo</label>
+          <input class="form-control" type="text" name="password" id="password" required=""
+            placeholder="{{user.correo}}">
+        </div>
+        <div class="form-group">
+          <label for="password">Empresa</label>
+          <input class="form-control" type="text" name="password" id="password" required=""
+            placeholder="{{user.empresa}}">
+        </div>
+        <div class="form-group">
+          <label for="password">Ingreso</label>
+          <input class="form-control" type="text" name="password" id="password" required=""
+            placeholder="{{user.ingreso}}">
+        </div>
+        <div class="form-group mb-0 text-center">
+          <button class="btn btn-primary btn-block" type="submit"><i class="mdi mdi-login"></i> Guardar </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
