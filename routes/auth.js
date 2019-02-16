@@ -126,6 +126,8 @@ router
     successRedirect: "/private"
   }));
 
+  
+
 
 
 module.exports = router;

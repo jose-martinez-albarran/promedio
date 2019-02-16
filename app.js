@@ -10,7 +10,7 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 const multer       = require('multer');
-const User         = require('./models/user');
+const user         = require('./models/User');
 
 const passport = require('./services/passport')
 const session = require('express-session')
@@ -72,16 +72,12 @@ app.post('/upload', function(req, res) {
 });
 
 
-app.use(passport.initialize())
-app.use(passport.session())
-
-
 passport.use(new GoogleStrategy({
   clientID: "780518897261-ktcvtita7t5ce99jmnlqj0gh8q8a8bu7.apps.googleusercontent.com",
   clientSecret: "w11M-09zbVszitX1JwHELtkn",
   callbackURL: "/auth/google/callback"
 }, (accessToken, refreshToken, profile, done) => {
-  User.findOne({ googleID: profile.id })
+  user.findOne({ googleID: profile.id })
   .then(user => {
     if (err) {
       return done(err);
@@ -104,6 +100,9 @@ passport.use(new GoogleStrategy({
   })
 
 }));
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 
 // Express View engine setup
