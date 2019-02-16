@@ -6,7 +6,11 @@ const User = require("../models/User");
 const multer = require("multer");
 const upload = multer({ dest: "./public/uploads/" });
 const Picture = require("../models/picture");
+const Promociones = require("../models/promociones");
 const nodeMailer = require('nodemailer');
+const iframeReplacement = require('node-iframe-replacement');
+
+router.use(iframeReplacement);
 
 router
   .get("/signup", (req, res, next) => {
@@ -31,7 +35,7 @@ router
     let role = req.user.role;
     console.log(role);
     if (role === "Empleado") {
-      return res.redirect("/private2");
+      return res.redirect("/empleado");
     } else {
       return res.redirect("/private");
     }
@@ -47,7 +51,7 @@ router
     }
     return res.redirect("/login");
   })
-  .get("/private2", (req, res, next) => {
+  .get("/empleado", (req, res, next) => {
     const user = req.user;
     if (user) {
       return res.render("auth/empleado/private2", { user: req.user });
@@ -82,6 +86,18 @@ router
   }
   return res.redirect("/login");
 })
+.get("/promo", (req, res, next) => {
+  const user = req.user;
+  console.log(user);
+  if (user) {
+    Promociones.find()
+      .then(promociones => {
+        res.render("apps/promos", { promociones });
+      })
+      .catch(err => {
+        console.log(err);
+      });} 
+})
 .post('/send-email', function (req, res) {
   let userCorreo = req.user;
   let transporter = nodeMailer.createTransport({
@@ -109,10 +125,53 @@ router
           res.render('apps/message');
       });
 })
-.get("/banorte", (req, res, next) => {
+.get('/banorte', (req, res, next) => {
   const user = req.user;
-  if (user) {
-    return res.render("banks/banorte", { user: req.user });
+  if(user){
+    return res.merge('banks/banorte', {
+      sourceUrl: 'https://www.banorte.com/',                             
+      sourcePlaceholder: 'div[data-entityid="container-top-stories#1"]' 
+  });
+  }
+  return res.redirect("/login");
+})
+.get('/bbva', (req, res, next) => {
+  const user = req.user;
+  if(user){
+    return res.merge('banks/bbva', {
+      sourceUrl: 'https://www.bancomer.com/',                             
+      sourcePlaceholder: 'div[data-entityid="container-top-stories#1"]' 
+  });
+  }
+  return res.redirect("/login");
+})
+.get('/citi', (req, res, next) => {
+  const user = req.user;
+  if(user){
+    return res.merge('banks/citi', {
+      sourceUrl: 'https://www.banamex.com/',                             
+      sourcePlaceholder: 'div[data-entityid="container-top-stories#1"]' 
+  });
+  }
+  return res.redirect("/login");
+})
+.get('/hsbc', (req, res, next) => {
+  const user = req.user;
+  if(user){
+    return res.merge('banks/hsbc', {
+      sourceUrl: 'https://www.hsbc.com.mx/',                             
+      sourcePlaceholder: 'div[data-entityid="container-top-stories#1"]' 
+  });
+  }
+  return res.redirect("/login");
+})
+.get('/santander', (req, res, next) => {
+  const user = req.user;
+  if(user){
+    return res.merge('banks/santander', {
+      sourceUrl: 'https://www.santander.com.mx/',                             
+      sourcePlaceholder: 'div[data-entityid="container-top-stories#1"]' 
+  });
   }
   return res.redirect("/login");
 })
