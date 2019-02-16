@@ -1,41 +1,147 @@
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const passport = require('passport');
+const {Router} = require('express');
+const router = Router();
+
 const User = require('../models/User.js');
+const multer  = require('multer');
+const upload = multer({ dest: './public/uploads/' });
 
-passport.use(new GoogleStrategy({
+router
+  .get('/signup', (req, res, next)=>{
+    res.render('auth/signup');
+  })
+  .post('/signup', (req, res, next)=>{
+    User.register( new User({ username: req.body.username , role: req.body.role }),
+    req.body.password,
+    function(err, account){
+      if(err){
+        return res.json(err);
+      }
+      return res.redirect('/login')
+    });
+  })
 
-  clientID: "780518897261-ktcvtita7t5ce99jmnlqj0gh8q8a8bu7.apps.googleusercontent.com",
-  clientSecret: "w11M-09zbVszitX1JwHELtkn",
-  callbackURL: "/auth/google/callback"
+   .get('/login', (req, res, next)=>{
+    return res.render('auth/login');
+  })
+  .post('/login', passport.authenticate('local'), (req, res, next)=>{
+    let role = req.user.role;
+    console.log(role)
+    if(role === 'Empleado'){
+      return res.redirect('/private2');
+    } else {
+      return res.redirect('/private');
+    }
+  })
+  .get('/logout', (req, res, next)=>{
+    req.logout();
+    res.redirect('/login');
+  })
 
-},
-(token, refreshToken, profile, done) => {
-    process.nextTick(() => {
-        User.findOne({ 'google.id' : profile.id }, (err, user) => {
-          if (err)
-            return done(err);
+  .get('/private', (req, res, next)=>{
+    const user = req.user;
+    if(user){
+      return res.render('auth/empleador/private', {user: req.user});
+    }
+    return res.redirect("/login")
+  })
+  .get('/private2', (req, res, next)=>{
+    const user = req.user;
+    if(user){
+      return res.render('auth/empleado/private2', {user: req.user});
+    }
+    return res.redirect("/login")
+  })
 
-          if (user) {
-                return done(null, user);
-          } else {
-            var newUser = new User();
+  .get('/profileE', (req, res, next) =>{
+    const user = req.user;
+    if(user){
+      return res.render('auth/empleador/profileE', {user: req.user});
+    }
+    return res.redirect("/login")
+  })
 
-            newUser.google.id    = profile.id;
-            newUser.google.token = token;
-            newUser.google.name  = profile.displayName;
-            newUser.google.email = profile.emails[0].value; // pull the first email
 
-            newUser.save((err) => {
-              if (err) throw err;
-              return done(null, newUser);
-            });
-          }
+  .get('/profile', (req, res, next)=>{
+    const user = req.user;
+    if(user){
+      return res.render('auth/empleado/profile', {user: req.user});
+    }
+    return res.redirect("/login")
+  })
+
+    //Google register
+ 
+  router.get("/auth/google", passport.authenticate("google", {
+    scope: ["https://www.googleapis.com/auth/plus.login",
+            "https://www.googleapis.com/auth/plus.profile.emails.read"]
+  }));
+
+  router.get('/auth/google/callback',
+  passport.authenticate('google', {
+    successRedirect : '/private',
+    failureRedirect : '/fail'
+  }));
+
+  
+
+   router.get('/logout', (req, res, next)=>{
+    req.logout();
+    res.redirect('/login');
+  })
+
+  .post("/profileE", (req,res) => {
+      const { ingreso , empresa, puesto, beneficiarios, username, role} = req.body;
+      User.updateOne(
+        { _id: req.query.user_id },
+        { $set: { ingreso , empresa, puesto, beneficiarios, username, role} }
+      )
+      .then(user => {
+        res.redirect("/profileE");
+      })
+      .catch(err => console.log(err));
+    });
+
+
+  router.post("/profile", (req,res) => {
+    const { ingreso , beneficiarios, username, role} = req.body;
+    User.updateOne(
+      { _id: req.query.user_id },
+      { $set: { ingreso , beneficiarios, username, role} }
+    )
+    .then(user => {
+      res.redirect("/profile");
+    })
+    .catch(err => console.log(err));
+  });
+
+  
+ router .get("/libros/:id", (req, res) => {
+    let libroId = req.params.id;
+    console.log(libroId);
+    Books.findOne({ _id: libroId })
+      .populate("author")
+      .then(libro => {
+        res.render("book-detalle", { libro });
+      })
+      .catch(err => {
+        console.log(err);
       });
   });
-}));
 
-passport.use(User.createStrategy());
 
-require('../routes/init.js')(User, passport);
+  router.post('/upload', upload.single('photo'), (req, res)=>{
+    const {path} = req.body
+    User.updateOne({_id:req.query.user_id}, {$set: {path}})
+    .then(libro =>{
+      res.redirect('/private2')
+    })
+    .catch(err=>console.log(err))
+  })
 
-module.exports = passport;
+ 
+
+module.exports = router;
+
+
+
