@@ -10,6 +10,7 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 const multer       = require('multer');
+const User         = require('./models/user');
 
 const passport = require('./services/passport')
 const session = require('express-session')

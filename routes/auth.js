@@ -72,7 +72,7 @@ router
     return res.redirect("/login")
   })
 
-   .get('/logout', (req, res, next)=>{
+     .get('/logout', (req, res, next)=>{
     req.logout();
     res.redirect('/login');
   })
@@ -116,5 +116,16 @@ router
     .catch(err=>console.log(err))
   })
   
+  router.get("/auth/google", passport.authenticate("google", {
+    scope: ["https://www.googleapis.com/auth/plus.login",
+            "https://www.googleapis.com/auth/plus.profile.emails.read"]
+  }));
+  
+  router.get("/auth/google/callback", passport.authenticate("google", {
+    failureRedirect: "/not-found",
+    successRedirect: "/private"
+  }));
+
+
 
 module.exports = router;
