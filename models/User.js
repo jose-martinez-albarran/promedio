@@ -5,7 +5,12 @@ const passportLocalMongoose =require('passport-local-mongoose');
 const userSchema = new Schema({
   username: String,
   password: String,
-  googleID: String,
+  google: {
+    id: String,
+    token: String,
+    name: String,
+    email: String
+  },
   role: String,
   empresa: String,
   nombre: String,
