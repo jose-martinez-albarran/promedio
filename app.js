@@ -101,8 +101,11 @@ passport.use(new GoogleStrategy({
 
 }));
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> parent of 28dc600... cambios en buscar
 app.use(passport.initialize())
 app.use(passport.session())
 

@@ -2,9 +2,7 @@ const passport = require('passport');
 const {Router} = require('express');
 const router = Router();
 
-const User = require('../models/User');
-const Empresa = require('../models/Empresa');
-const Beneficiarios = require ('../models/Beneficiarios');
+const User = require('../models/User.js');
 const multer  = require('multer');
 const upload = multer({ dest: './public/uploads/' });
 
@@ -72,7 +70,10 @@ router
     return res.redirect("/login")
   })
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 28dc600... cambios en buscar
     //Google register
  
   router.get("/auth/google", passport.authenticate("google", {
@@ -85,7 +86,6 @@ router
     successRedirect : '/private',
     failureRedirect : '/fail'
   }));
-
 
   
 
