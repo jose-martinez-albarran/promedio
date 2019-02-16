@@ -104,6 +104,8 @@ passport.use(new GoogleStrategy({
 
 }));
 
+app.use(user.createStrategy());
+
 app.use(passport.initialize())
 app.use(passport.session())
 

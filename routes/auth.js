@@ -2,7 +2,9 @@ const passport = require('passport');
 const {Router} = require('express');
 const router = Router();
 
-const User = require('../models/User.js');
+const User = require('../models/User');
+const Empresa = require('../models/Empresa');
+const Beneficiarios = require ('../models/Beneficiarios');
 const multer  = require('multer');
 const upload = multer({ dest: './public/uploads/' });
 
@@ -70,6 +72,19 @@ router
     return res.redirect("/login")
   })
 
+  router.post('/buscar', (req, res)=>{
+    let nombreEmpleado = req.body.username;
+    User.find({title: {$regex: nombreEmpleado, $options: 'r'}})
+    .populate('username')
+    .then((empleado)=>{
+      res.json(empleado)
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  })
+  
+
     //Google register
  
   router.get("/auth/google", passport.authenticate("google", {
@@ -82,6 +97,7 @@ router
     successRedirect : '/private',
     failureRedirect : '/fail'
   }));
+
 
   
 
