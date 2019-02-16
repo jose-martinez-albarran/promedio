@@ -4,23 +4,22 @@ document.addEventListener('DOMContentLoaded', function () {
       type: 'column'
     },
     title: {
-      text: 'Efficiency Optimization by Branch'
+      text: ''
     },
     xAxis: {
       categories: [
-        'Seattle HQ',
-        'San Francisco',
-        'Tokyo'
+        'CDMX',
+        'MTY'
       ]
     },
     yAxis: [{
       min: 0,
       title: {
-        text: 'Employees'
+        text: 'Ingresos'
       }
     }, {
       title: {
-        text: 'Profit (millions)'
+        text: 'Ahorros'
       },
       opposite: true
     }],
@@ -38,21 +37,21 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     },
     series: [{
-      name: 'Employees',
+      name: 'Ingresos Ideales',
       color: 'rgba(165,170,217,1)',
-      data: [150, 73, 20],
+      data: [150, 73],
       pointPadding: 0.3,
       pointPlacement: -0.2
     }, {
-      name: 'Employees Optimized',
+      name: 'Ingresos',
       color: 'rgba(126,86,134,.9)',
-      data: [140, 90, 40],
+      data: [140, 90],
       pointPadding: 0.4,
       pointPlacement: -0.2
     }, {
-      name: 'Profit',
+      name: 'Ahorros Ideales',
       color: 'rgba(248,161,63,1)',
-      data: [183.6, 178.8, 198.5],
+      data: [183.6, 178.8],
       tooltip: {
         valuePrefix: '$',
         valueSuffix: ' M'
@@ -61,9 +60,9 @@ document.addEventListener('DOMContentLoaded', function () {
       pointPlacement: 0.2,
       yAxis: 1
     }, {
-      name: 'Profit Optimized',
+      name: 'Ahorros',
       color: 'rgba(186,60,61,.9)',
-      data: [203.6, 198.8, 208.5],
+      data: [203.6, 198.8],
       tooltip: {
         valuePrefix: '$',
         valueSuffix: ' M'

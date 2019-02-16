@@ -1,0 +1,24 @@
+<div class="wrapper">{{> leftSideBar}}
+  <div class="content-page">
+    <div class="card-body">
+      <h1>Consulta</h1><br />
+      <form action="/send-email" method="post">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input class="form-control" type="text" name="nombre" id="nombre" required="" value="{{user.nombre}}">
+        </div>
+        <div class="form-group">
+          <label for="subject">Asunto:</label>
+          <input type="text" class="form-control" name="subject" placeholder="Asunto">
+        </div>
+        <div class="form-group">
+          <label for="body">Mensaje:</label>
+          <textarea cols="5" rows="5" class="form-control" name="body" placeholder="Escriba su mensaje, por favor ..."></textarea>
+        </div>
+        <div class="form-group mb-0 text-center">
+          <button class="btn btn-primary btn-block" type="submit"><i class="mdi mdi-login"></i> Enviar </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

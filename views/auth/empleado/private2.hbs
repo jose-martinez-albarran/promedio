@@ -20,11 +20,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="javascript: void(0);" class="btn btn-primary ml-2">
+                                    <a href="/empleado" class="btn btn-primary ml-2">
                                         <i class="mdi mdi-autorenew"></i>
-                                    </a>
-                                    <a href="javascript: void(0);" class="btn btn-primary ml-1">
-                                        <i class="mdi mdi-filter-variant"></i>
                                     </a>
                                 </form>
                             </div>
@@ -45,11 +42,11 @@
                                         </div>
                                         <h5 class="text-muted font-weight-normal mt-0" title="Number of Customers">
                                             Ingreso</h5>
-                                        <h3 class="mt-3 mb-3">{{user.ingresoActual}}</h3>
+                                        <h3 class="mt-3 mb-3">${{user.ingresoActual}}</h3>
                                         <p class="mb-0 text-muted">
                                             <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i>
                                                 5.27%</span>
-                                            <span class="text-nowrap">Since last month</span>
+                                            <span class="text-nowrap">Desde el último mes</span>
                                         </p>
                                     </div>
                                 </div>
@@ -63,11 +60,11 @@
                                         </div>
                                         <h5 class="text-muted font-weight-normal mt-0" title="Number of Orders">Ahorro
                                         </h5>
-                                        <h3 class="mt-3 mb-3">5,543</h3>
+                                        <h3 class="mt-3 mb-3">$5,543</h3>
                                         <p class="mb-0 text-muted">
                                             <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i>
                                                 1.08%</span>
-                                            <span class="text-nowrap">Since last month</span>
+                                            <span class="text-nowrap">Desde el último mes</span>
                                         </p>
                                     </div>
                                 </div>
@@ -83,11 +80,11 @@
                                         </div>
                                         <h5 class="text-muted font-weight-normal mt-0" title="Average Revenue">Dolar
                                         </h5>
-                                        <h3 class="mt-3 mb-3">$6,254</h3>
+                                        <h3 class="mt-3 mb-3">$19.24</h3>
                                         <p class="mb-0 text-muted">
                                             <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i>
                                                 7.00%</span>
-                                            <span class="text-nowrap">Since last month</span>
+                                            <span class="text-nowrap">Desde el último mes</span>
                                         </p>
                                     </div>
                                 </div>
@@ -99,12 +96,12 @@
                                         <div class="float-right">
                                             <i class="mdi mdi-pulse widget-icon"></i>
                                         </div>
-                                        <h5 class="text-muted font-weight-normal mt-0" title="Growth">Oro</h5>
-                                        <h3 class="mt-3 mb-3">+ 30.56%</h3>
+                                        <h5 class="text-muted font-weight-normal mt-0" title="Growth">Oro MXN/Gr</h5>
+                                        <h3 class="mt-3 mb-3">$817.57</h3>
                                         <p class="mb-0 text-muted">
                                             <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i>
                                                 4.87%</span>
-                                            <span class="text-nowrap">Since last month</span>
+                                            <span class="text-nowrap">Desde el último mes</span>
                                         </p>
                                     </div>
                                 </div>
@@ -116,23 +113,8 @@
                     <div class="col-xl-7">
                         <div class="card">
                             <div class="card-body">
-                                <div class="dropdown float-right">
-                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="mdi mdi-dots-vertical"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Profit</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                    </div>
-                                </div>
-                                <h4 class="header-title mb-3">actions Vs Actuals</h4>
+
+                                <h4 class="header-title mb-3">Ingresos Vs Ahorros</h4>
 
 
                                 <div id="container" style="min-width: 150px; height: 400px; margin: 0 auto"></div>
@@ -147,38 +129,15 @@
                     <div class="col-xl-8">
                         <div class="card">
                             <div class="card-body">
-                                <div class="dropdown float-right">
-                                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i class="mdi mdi-dots-vertical"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Profit</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                    </div>
-                                </div>
-                                <h4 class="header-title mb-3">Revenue</h4>
+
+                                <h4 class="header-title mb-3">Ganancias</h4>
 
                                 <div class="pull-in chart-content-bg">
                                     <div id="dynamicChart"
                                         style="min-width: 150px; height: 550px; max-width: 600px; margin: 0 auto"></div>
                                 </div>
 
-                                <div class="dash-item-overlay d-none d-md-block">
-                                    <h5>Today's Earning: $2,562.30</h5>
-                                    <p class="text-muted font-13 mb-3 mt-2">Etiam ultricies nisi vel augue. Curabitur
-                                        ullamcorper ultricies nisi. Nam eget dui.
-                                        Etiam rhoncus...</p>
-                                    <a href="javascript: void(0);" class="btn btn-outline-primary">View Statements
-                                        <i class="mdi mdi-arrow-right ml-2"></i>
-                                    </a>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -191,24 +150,15 @@
                                         aria-expanded="false">
                                         <i class="mdi mdi-dots-vertical"></i>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Sales Report</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Profit</a>
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                                    </div>
+
                                 </div>
-                                <h4 class="header-title">Revenue By Location</h4>
+                                <h4 class="header-title">Ganancias por Sucursal</h4>
                                 <div class="mb-4 mt-4">
                                     <div id="chartPie"
                                         style="min-width: 150px; height: 400px; max-width: 600px; margin: 0 auto"></div>
                                 </div>
 
-                                <h5 class="mb-1 mt-0 font-weight-normal">New York</h5>
+                                <h5 class="mb-1 mt-0 font-weight-normal">CDMX</h5>
                                 <div class="progress-w-percent">
                                     <span class="progress-value font-weight-bold">72k </span>
                                     <div class="progress progress-sm">
@@ -217,7 +167,7 @@
                                     </div>
                                 </div>
 
-                                <h5 class="mb-1 mt-0 font-weight-normal">San Francisco</h5>
+                                <h5 class="mb-1 mt-0 font-weight-normal">MTY</h5>
                                 <div class="progress-w-percent">
                                     <span class="progress-value font-weight-bold">39k </span>
                                     <div class="progress progress-sm">
@@ -226,23 +176,6 @@
                                     </div>
                                 </div>
 
-                                <h5 class="mb-1 mt-0 font-weight-normal">Sydney</h5>
-                                <div class="progress-w-percent">
-                                    <span class="progress-value font-weight-bold">25k </span>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar" role="progressbar" style="width: 39%;"
-                                            aria-valuenow="39" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-
-                                <h5 class="mb-1 mt-0 font-weight-normal">Singapore</h5>
-                                <div class="progress-w-percent mb-0">
-                                    <span class="progress-value font-weight-bold">61k </span>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar" role="progressbar" style="width: 61%;"
-                                            aria-valuenow="61" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -250,6 +183,7 @@
 
 
 
+<<<<<<< HEAD
                 <div class="row">
 =======
                 <!-- end page title -->
@@ -492,9 +426,17 @@
                     <!-- end col -->
                 </div>
                 <!-- end row -->
+=======
+
+     
+>>>>>>> uploadPhoto
             </div>
             <!-- container -->
         </div>
         <!-- content -->
     </div>
+            <script src="javascripts/script.js"></script>
+        <script src="javascripts/chart_a.js"></script>
+        <script src="javascripts/chart_b.js"></script>
+        <script src="javascripts/chart_c.js"></script>
 </div>

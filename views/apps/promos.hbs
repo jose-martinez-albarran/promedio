@@ -1,0 +1,21 @@
+<div class="wrapper">{{> leftSideBar}}
+  <div class="content-page">
+    <h1>Promociones</h1>
+    {{#each promociones}}
+    <div class="card widget-flat">
+      <div class="card-body">
+        <div class="d-flex flex-column align-items-center">
+          <h2>{{this.banco}}</h2>
+          <h3>{{this.producto}}</h3>
+        </div>
+        <div class="d-flex justify-content-center">
+          <img src="{{this.imagePath}}" alt="{{this.categoria}}" style="height: 25vh;">
+        </div>
+        <div class="d-flex flex-column align-items-center">
+          <h4>{{this.mensaje}}</h4>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
