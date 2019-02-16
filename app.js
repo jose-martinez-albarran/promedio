@@ -77,7 +77,7 @@ passport.use(new GoogleStrategy({
   clientSecret: "w11M-09zbVszitX1JwHELtkn",
   callbackURL: "/auth/google/callback"
 }, (accessToken, refreshToken, profile, done) => {
-  user.findOne({ googleID: profile.id })
+  user.findOne({ 'google.id': profile.id })
   .then(user => {
     if (err) {
       return done(err);
@@ -86,9 +86,12 @@ passport.use(new GoogleStrategy({
       return done(null, user);
     }
 
-    const newUser = new User({
-      googleID: profile.id
-    });
+    var newUser = new User();
+
+    newUser.google.id    = profile.id;
+    newUser.google.token = token;
+    newUser.google.name  = profile.displayName;
+    newUser.google.email = profile.emails[0].value;
 
     newUser.save()
     .then(user => {
