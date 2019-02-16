@@ -151,7 +151,7 @@ router
 
   router.post('/buscar', (req, res)=>{
     let nombreEmpleado = req.body.username;
-    User.find({title: {$regex: nombreEmpleado, $options: 'r'}})
+    User.find({title: {$regex: nombreEmpleado, $options: 'i'}})
     .populate('username')
     .then((empleado)=>{
       res.json(empleado)
