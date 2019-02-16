@@ -1,13 +1,10 @@
 const passport = require('passport');
 const {Router} = require('express');
 const router = Router();
-const express = require("express");
 
 const User = require('../models/User');
 const multer  = require('multer');
 const upload = multer({ dest: './public/uploads/' });
-const authRoutes = express.Router();
-
 
 router
   .get('/signup', (req, res, next)=>{
@@ -23,11 +20,10 @@ router
       return res.redirect('/login')
     });
   })
-  .get('/login', (req, res, next)=>{
+
+   .get('/login', (req, res, next)=>{
     return res.render('auth/login');
   })
-
-  
   .post('/login', passport.authenticate('local'), (req, res, next)=>{
     let role = req.user.role;
     console.log(role)
@@ -41,6 +37,7 @@ router
     req.logout();
     res.redirect('/login');
   })
+
   .get('/private', (req, res, next)=>{
     const user = req.user;
     if(user){
@@ -56,13 +53,14 @@ router
     return res.redirect("/login")
   })
 
-  .get('/profileE', (req, res, next)=>{
+  .get('/profileE', (req, res, next) =>{
     const user = req.user;
     if(user){
       return res.render('auth/empleador/profileE', {user: req.user});
     }
-    return res.redirect("/login");
+    return res.redirect("/login")
   })
+
 
   .get('/profile', (req, res, next)=>{
     const user = req.user;
@@ -72,14 +70,25 @@ router
     return res.redirect("/login")
   })
 
-     .get('/logout', (req, res, next)=>{
+   .get('/logout', (req, res, next)=>{
     req.logout();
     res.redirect('/login');
   })
 
-  
+  .post("/profileE", (req,res) => {
+      const { ingreso , empresa, puesto, beneficiarios, username, role} = req.body;
+      User.updateOne(
+        { _id: req.query.user_id },
+        { $set: { ingreso , empresa, puesto, beneficiarios, username, role} }
+      )
+      .then(user => {
+        res.redirect("/profileE");
+      })
+      .catch(err => console.log(err));
+    });
 
-  .post("/profile", (req,res) => {
+
+  router.post("/profile", (req,res) => {
     const { ingreso , beneficiarios, username, role} = req.body;
     User.updateOne(
       { _id: req.query.user_id },
@@ -91,8 +100,7 @@ router
     .catch(err => console.log(err));
   });
 
- 
- 
+  
  router .get("/libros/:id", (req, res) => {
     let libroId = req.params.id;
     console.log(libroId);
@@ -115,7 +123,7 @@ router
     })
     .catch(err=>console.log(err))
   })
-  
+
   router.get("/auth/google", passport.authenticate("google", {
     scope: ["https://www.googleapis.com/auth/plus.login",
             "https://www.googleapis.com/auth/plus.profile.emails.read"]
@@ -125,9 +133,10 @@ router
     failureRedirect: "/not-found",
     successRedirect: "/private"
   }));
-
+  
   
 
-
-
 module.exports = router;
+
+
+
