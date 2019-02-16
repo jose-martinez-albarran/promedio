@@ -131,8 +131,9 @@ router
   
   router.get("/auth/google/callback", passport.authenticate("google", {
     failureRedirect: "/not-found",
-    successRedirect: "/private"
+    successRedirect: "/login"
   }));
+
   
   
 
