@@ -73,9 +73,7 @@ app.post('/upload', function(req, res) {
 
 
 passport.use(new GoogleStrategy({
-  clientID: "780518897261-ktcvtita7t5ce99jmnlqj0gh8q8a8bu7.apps.googleusercontent.com",
-  clientSecret: "w11M-09zbVszitX1JwHELtkn",
-  callbackURL: "/auth/google/callback"
+
 }, (accessToken, refreshToken, profile, done) => {
   user.findOne({ googleID: profile.id })
   .then(user => {
